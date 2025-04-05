@@ -1,0 +1,101 @@
+{
+  "rss_feeds": [],
+  "hacker_news": {
+    "include": true,
+    "max_articles": 5,
+    "only_self_posts": false,
+    "api_endpoints": {
+      "top_stories": "https://hacker-news.firebaseio.com/v0/topstories.json",
+      "item": "https://hacker-news.firebaseio.com/v0/item/{}.json",
+      "discussion_url": "https://news.ycombinator.com/item?id={}"
+    }
+  },
+  "pdf_options": {
+    "page-size": "A4",
+    "margin-top": "12mm",
+    "margin-right": "12mm",
+    "margin-bottom": "12mm",
+    "margin-left": "12mm",
+    "encoding": "UTF-8",
+    "no-outline": null,
+    "enable-local-file-access": null,
+    "print-media-type": null,
+    "dpi": 1200,
+    "grayscale": true
+  },
+  "output_directory": "./papers",
+  "templates": {
+    "directory": "./templates",
+    "main_template": "paper_template.html",
+    "article_template": "article_template.html"
+  },
+  "extract_full_content": true,
+  "include_images": true,
+  "timeout": {
+    "request": 10,
+    "extraction": 15
+  },
+  "max_content_length": 50000,
+  "newspaper_title": "Morning Post",
+  "columns": 2,
+  "fallback_selectors": [
+    "article",
+    "main",
+    "div.content",
+    "div.article",
+    "div.post",
+    ".entry-content",
+    "#content",
+    ".article__body",
+    ".post-content",
+    ".story",
+    ".story-body",
+    "[itemprop='articleBody']"
+  ],
+  "elements_to_remove": [
+    "script",
+    "style",
+    "iframe",
+    "noscript",
+    "video",
+    "audio",
+    "embed",
+    "object",
+    "canvas",
+    "form",
+    "button",
+    "aside",
+    "header",
+    "footer",
+    "nav"
+  ],
+  "class_selectors_to_remove": [
+    ".comments",
+    ".social-share",
+    ".related-articles",
+    ".recommendations",
+    ".newsletter-signup",
+    ".advertisement",
+    ".ad",
+    ".popup",
+    ".modal",
+    ".share",
+    ".social",
+    ".related",
+    ".popular",
+    ".trending",
+    ".recommended",
+    "#comments",
+    ".comments",
+    ".comment-section",
+    ".advertisement",
+    ".ad-container",
+    ".sponsored",
+    ".subscribe",
+    ".newsletter",
+    ".signup",
+    ".sidebar",
+    ".footer",
+    ".header"
+  ]
+}
