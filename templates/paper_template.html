@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Morning Paper - {{ date }}</title>
+        <style>
+            @page {
+                margin: 1.2cm;
+                size: A4;
+            }
+            body {
+                font-family: "Times New Roman", Times, serif;
+                line-height: 1.25;
+                margin: 0;
+                padding: 0;
+                color: #222;
+                font-size: 9pt;
+                background-color: #fcfcfc;
+            }
+            .header {
+                text-align: center;
+                border-bottom: 2px solid #000;
+                padding-bottom: 0.3cm;
+                margin-bottom: 0.4cm;
+                margin-top: 0;
+                padding-top: 0;
+            }
+            .masthead {
+                font-size: 28pt;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+                margin: 0;
+                font-family: "Times New Roman", Times, serif;
+                text-transform: uppercase;
+            }
+            .date {
+                font-style: italic;
+                margin-top: 0.1cm;
+                font-size: 10pt;
+            }
+
+            .articles-container {
+                column-count: 2;
+                column-gap: 0.5cm;
+                column-rule: 1px solid #ccc;
+                column-fill: auto;
+            }
+
+            .article {
+                margin-bottom: 0.5cm;
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+                padding: 0.2cm;
+                background-color: white;
+                border-radius: 2px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .article-title {
+                font-size: 11pt;
+                font-weight: bold;
+                margin-bottom: 0.1cm;
+                line-height: 1.2;
+                break-after: avoid;
+                page-break-after: avoid;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.1cm;
+            }
+
+            .article-meta {
+                font-style: italic;
+                color: #444;
+                margin-bottom: 0.1cm;
+                font-size: 8pt;
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            .article-content {
+                text-align: justify;
+                font-size: 9pt;
+                hyphens: auto;
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+            }
+
+            .article-source {
+                font-style: italic;
+                font-size: 8pt;
+                text-align: right;
+                margin-top: 0.1cm;
+                padding-top: 0.1cm;
+                border-top: 1px dotted #eee;
+            }
+
+            img {
+                max-width: 40%;
+                height: auto;
+                margin: 0.2cm;
+                float: right;
+                clear: right;
+                border: 1px solid #eee;
+            }
+
+            .article-content p {
+                margin: 0.15cm 0;
+                text-indent: 0.3cm;
+            }
+
+            .article-content p:first-child {
+                text-indent: 0;
+                font-weight: 500; /* Slightly bolder first paragraph */
+            }
+
+            /* Drop caps removed */
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                break-after: avoid;
+                page-break-after: avoid;
+                margin: 0.2cm 0 0.1cm 0;
+                line-height: 1.2;
+            }
+
+            .article-content h1 {
+                font-size: 11pt;
+            }
+            .article-content h2 {
+                font-size: 10.5pt;
+            }
+            .article-content h3 {
+                font-size: 10pt;
+            }
+            .article-content h4,
+            h5,
+            h6 {
+                font-size: 9.5pt;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            code,
+            pre {
+                font-family: "Courier New", Courier, monospace;
+                font-size: 8pt;
+                background-color: #f8f8f8;
+                padding: 0.1cm;
+                border-radius: 2px;
+            }
+
+            pre {
+                padding: 0.2cm;
+                overflow-x: hidden;
+                white-space: pre-wrap;
+                margin: 0.2cm 0;
+                border-left: 3px solid #eee;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0.2cm 0;
+                font-size: 8pt;
+            }
+
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 0.1cm;
+            }
+
+            th {
+                background-color: #f5f5f5;
+            }
+
+            .article:not(:last-child) {
+                margin-bottom: 0.4cm;
+                padding-bottom: 0.2cm;
+            }
+
+            .article-content blockquote {
+                float: right;
+                width: 40%;
+                font-style: italic;
+                font-size: 9.5pt;
+                border-left: 3px solid #ddd;
+                margin: 0.2cm;
+                padding: 0.1cm 0.2cm;
+                background-color: #fafafa;
+            }
+
+            .article-content h2,
+            .article-content h3 {
+                border-bottom: 1px dotted #eee;
+                padding-bottom: 0.05cm;
+            }
+
+            .article-content ul,
+            .article-content ol {
+                margin: 0.1cm 0;
+                padding-left: 0.5cm;
+            }
+
+            .article-content li {
+                margin-bottom: 0.05cm;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1 class="masthead">Morning Post</h1>
+            <div class="date">{{ date }}</div>
+        </div>
+
+        <div class="articles-container">
+            {% for article in articles %}
+            <div class="article">
+                <h3 class="article-title">{{ article.title }}</h3>
+                <div class="article-meta">
+                    Published: {{ article.published }}
+                </div>
+                <div class="article-content">{{ article.content | safe }}</div>
+                <div class="article-source">Source: {{ article.source }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
